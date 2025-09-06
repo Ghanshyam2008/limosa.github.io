@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autocomplete Search</title>
+  <style>
+    body { font-family: Arial; }
+    #searchInput {
+      width: 250px;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #myList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: none;    
+      position: absolute;
+      background: #fff;
+    }
+    #myList li {
+      padding: 8px;
+      cursor: pointer;
+    }
+    #myList li:hover {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Search Packages</h2>
+  <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search here...">
+  <ul id="myList">
+    <li>Dubai Tour Package</li>
+    <li>Malaysia Holiday</li>
+    <li>Singapore Trip</li>
+    <li>Thailand Vacation</li>
+    <li>India Special</li>
+  </ul>
+
+  <script>
+    function searchFunction() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let list = document.getElementById("myList");
+      let items = list.getElementsByTagName("li");
+      
+      // Show list only when user types something
+      if (input === "") {
+        list.style.display = "none";
+        return;
+      } else {
+        list.style.display = "block";
+      }
+
+      // Filter items
+      let hasResult = false;
+      for (let i = 0; i < items.length; i++) {
+        let text = items[i].textContent.toLowerCase();
+        if (text.includes(input)) {
+          items[i].style.display = "";
+          hasResult = true;
+        } else {
+          items[i].style.display = "none";
+        }
+      }
+
+      // Hide list if no matches
+      list.style.display = hasResult ? "block" : "none";
+    }
+
+    // Optional: click on item fills input
+    document.querySelectorAll("#myList li").forEach(item => {
+      item.addEventListener("click", () => {
+        document.getElementById("searchInput").value = item.textContent;
+        document.getElementById("myList").style.display = "none";
+      });
+    });
+  </script>
+</body>
+</html>

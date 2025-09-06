@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - FLY WORLD LIMOSA</title>
+  
+  <!-- Font imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ====== Base resets & body background ====== */
+    :root{
+      --accent: #ff6b2d; /* saffron/orange accent */
+      --accent-dark: #e55a22;
+      --accent-light: #ff8e5d;
+      --muted: #f3f3f5;
+      --text: #111;
+      --dark-bg: #010101;
+      --darker-bg: #06060a;
+      --card-bg: rgba(255,255,255,0.06);
+      --max-width: 1150px;
+      --glass: rgba(255,255,255,0.06);
+      --transition: all 0.3s ease;
+    }
+    *{box-sizing: border-box}
+    html,body{height:100%;margin:0}
+
+    body{
+      font-family: "Nunito", "Ubuntu", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background-image: url("bg.jpg");
+      background-size: cover;
+      background-attachment: fixed;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      color: var(--muted);
+    }
+
+    /* ---------- Header / Navigation ---------- */
+    header.site-header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.45));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .site-bar{
+      max-width:var(--max-width); margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:16px;
+    }
+    .brand{
+      font-weight:800; 
+      color:var(--muted); 
+      letter-spacing:0.4px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand i {
+      color: var(--accent);
+    }
+    nav.main-nav{margin-left:auto}
+    nav.main-nav ul{display:flex; gap:6px; list-style:none; margin:0; padding:0; align-items:center}
+    nav.main-nav a{
+      color:var(--muted); 
+      text-decoration:none; 
+      padding:10px 16px; 
+      border-radius:8px; 
+      font-weight:600;
+      transition: var(--transition);
+      position: relative;
+    }
+    nav.main-nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 6px;
+      left: 16px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+    nav.main-nav a:hover{background:rgba(255,255,255,0.03); color:var(--accent)}
+    nav.main-nav a:hover:after { width: calc(100% - 32px); }
+
+    /* Mobile hamburger (simple CSS-only) */
+    .mobile-toggle{display:none}
+    .hamburger{display:none}
+    @media (max-width:860px){
+      nav.main-nav{position:fixed; inset:52px 12px auto 12px; background:linear-gradient(180deg, rgba(6,6,6,0.96), rgba(6,6,6,0.98)); padding:14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transform-origin:top right; display:none}
+      .hamburger{display:inline-flex; margin-left:auto; cursor:pointer}
+      .mobile-toggle:checked + .hamburger + nav.main-nav{display:block}
+      nav.main-nav ul{flex-direction:column; gap:10px}
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs{
+      max-width:var(--max-width); 
+      margin:28px auto 18px; 
+      padding:0 20px; 
+      color:rgba(255,255,255,0.8); 
+      font-size:14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .breadcrumbs a{
+      color:rgba(255,255,255,0.8); 
+      text-decoration:none;
+      transition: var(--transition);
+    }
+    .breadcrumbs a:hover {
+      color: var(--accent);
+    }
+    .breadcrumbs span {
+      opacity: 0.6;
+    }
+
+    /* Main content */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      color: var(--muted);
+      margin: 0 0 28px;
+      font-weight: 800;
+      font-size: 2.2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      height: 4px;
+      width: 60px;
+      background: var(--accent);
+      bottom: -10px;
+      left: 0;
+      border-radius: 2px;
+    }
+
+    /* Contact section */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 900px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Contact info card */
+    .contact-info {
+      background: black;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 35px rgba(2,6,23,0.45);
+      
+      border: 20px solid black;
+      height: fit-content;
+      background-color: #010101;
+    }
+
+    .contact-info h3 {
+      margin-top: 0;
+      
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .info-icon {
+      background:rgba(255,255,255,0.08);
+      color: rgb(255, 0, 0);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+   
+
+    .info-content h4 {
+      margin: 0 0 5px;
+      font-size: 1.1rem;
+    }
+
+    .info-content p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .social-links i:hover {
+      color: black;
+    }
+
+    
+    .social-links a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+      
+    }
+
+    /* Map */
+    .map-container {
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      overflow: hidden;
+      height: 500px;
+      margin-top: 30px;
+      background-color: black;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .map-placeholder i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    /* Contact form */
+    .contact-form {
+      background: black;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 35px rgba(2,6,23,0.45);
+      border: 1px solid rgb(0, 0, 0);
+      background-color: black;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(255,107,45,0.2);
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255,107,45,0.25);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(255,107,45,0.35);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    /* WhatsApp specific button */
+    .btn-whatsapp {
+      background: #25D366;
+    }
+    
+    .btn-whatsapp:hover {
+      background: #128C7E;
+    }
+
+    /* Business hours */
+    .business-hours {
+      margin-top: 30px;
+    }
+
+    .hours-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .hours-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Message explanation */
+    .message-explanation {
+      background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,165,0,0.05));
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 30px 0;
+      background-color: black;
+    }
+
+    .message-explanation h4 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(180deg, var(--darker-bg), rgb(230, 103, 0));
+      padding: 50px 0 30px;
+      margin-top: 60px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      color: var(--muted);
+      margin: 0 0 20px;
+      font-size: 1.2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h3:after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 30px;
+      background: var(--accent);
+      bottom: -8px;
+      left: 0;
+    }
+
+    .footer-col p {
+      opacity: 0.7;
+      line-height: 1.6;
+    }
+
+    .footer-col a{
+      color: white;
+      text-decoration: none;
+    }
+
+    .contact-info {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-info li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-info2 a{
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+    }
+
+    .contact-info i {
+      color: var(--accent);
+      font-size: 1.2rem;
+      padding:10px ;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 50px;
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info, .contact-form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Header with improved structure and mobile toggle ====== -->
+  <header class="site-header" role="banner">
+    <div class="site-bar">
+      <div class="brand">
+        <i class="fas fa-globe-americas"></i>
+        FLY WORLD LIMOSA
+      </div>
+
+      <!-- Mobile-only checkbox toggle (no JS required) -->
+      <input id="mobile-toggle" class="mobile-toggle" type="checkbox" aria-hidden="true" />
+      <label for="mobile-toggle" class="hamburger" aria-hidden="true" title="Toggle menu" style="color:var(--muted);">
+        <!-- simple hamburger icon -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect y="5" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="17" width="24" height="2" rx="1" fill="currentColor"></rect>
+        </svg>
+      </label>
+
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="HOME.HTML"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="TravelPackages.html"><i class="fas fa-suitcase"></i> Travel Packages</a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+          <li><a href="contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  
+
+  <main>
+    <h1 class="section-title">Get In Touch</h1>
+    <p>We'd love to hear from you! Reach out to us for any inquiries or to plan your next adventure.</p>
+
+    <!-- Message Explanation -->
+    <div class="message-explanation">
+      <h4><i class="fas fa-info-circle"></i> How messaging works</h4>
+      <p>When you send us a message using this form, it will be sent directly to our WhatsApp number. This allows us to respond to you quickly and efficiently.</p>
+    </div>
+
+    <div class="contact-container">
+      <!-- Contact information -->
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt" ></i>
+          </div>
+          <div class="info-content">
+            <h4>Our Office</h4>
+            <p>302 Ayushyaman Plaza, Nava Naroda,<br>Ahmedabad – 382330<br>(near Sadi Mata Mandir, GEB Road)</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="info-content">
+            <h4>Phone Number</h4>
+            <p><a href="tel:+919924003434" style="color: var(--muted); text-decoration: none;">+91 99240 03434</a></p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="info-content">
+            <h4>WhatsApp</h4>
+            <p><a href="https://wa.me/919924003434" style="color: var(--muted); text-decoration: none;">Message us on WhatsApp</a></p>
+          </div>
+        </div>
+        
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://wa.me/919924003434" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <!-- Business hours -->
+        <div class="business-hours">
+          <h4>Business Hours</h4>
+          <ul class="hours-list">
+            <li><span>Monday - Friday:</span> <span>9:00 AM - 6:00 PM</span></li>
+            <li><span>Saturday:</span> <span>10:00 AM - 4:00 PM</span></li>
+            <li><span>Sunday:</span> <span>Closed</span></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Contact form -->
+      <div class="contact-form">
+        <h3>Send Us a Message via WhatsApp</h3>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" class="form-control" placeholder="What is this regarding?">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-block btn-whatsapp"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Map section -->
+    <h3 class="section-title">Our Location</h3>
+    <div class="map-container">
+      <div class="map-placeholder">
+        <i class="fas fa-map-marked-alt"></i>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.5121570782276!2d72.67083957449606!3d23.07834021424629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e81e0a77072cd%3A0xbfd35da6437349!2sLimosa%20Fly%20World!5e0!3m2!1sen!2sin!4v1756660899594!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <small>302 Ayushyaman Plaza, Nava Naroda, Ahmedabad</small>
+      </div>
+    </div>
+  </main>
+
+  <!-- Enhanced footer with contact information -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>Fly World Limosa</h3>
+        <p>Creating unforgettable travel experiences with personalized service and attention to detail.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="https://wa.me/919924003434"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul class="contact-info2">
+          <li><i class="fas fa-phone"></i> <a href="tel:+919924003434">+91 9924003434</a></li><br>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:info@flyworld.com">info@flyworld.com</a></li><br>
+          <li><i class="fas fa-map-marker-alt"></i> 302 Ayushyaman Plaza, Nava Naroda, Ahmedabad</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Popular Destinations</h3>
+        <p> •<a href="dubai2.html">Dubai</a> <br> 
+         •<a href="dubai2.html">Bali</a> <br> 
+         •<a href="dubai2.html">Singapore</a> <br> 
+         •<a href="dubai2.html">Thailand</a> <br> 
+         •<a href="dubai2.html">Maldives</a> <br> 
+        </p>
+      </div>
+    </div>
+    <div class="copyright">
+      © <span id="year"></span> Fly World Limosa — All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // WhatsApp message functionality
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      // Format the message for WhatsApp
+      const whatsappMessage = `New Message from FLY WORLD LIMOSA Website:%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone || 'Not provided'}%0ASubject: ${subject || 'No subject'}%0AMessage: ${message}`;
+      
+      // Create WhatsApp URL
+      const whatsappURL = `https://wa.me/919924003434?text=${whatsappMessage}`;
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappURL, '_blank');
+      
+      // Show success message
+      alert('Thank you for your message! You are being redirected to WhatsApp to send your message.');
+      
+      // Reset form
+      this.reset();
+    });
+
+    /*
+      HOW THIS WORKS:
+      
+      1. When a user submits the form, the data is collected
+      2. The data is formatted into a message string with each field on a new line
+      3. The message is encoded for a URL (spaces become %20, line breaks become %0A)
+      4. A WhatsApp URL is created with your phone number and the pre-filled message
+      5. The user is redirected to WhatsApp to send the message
+      
+      IMPORTANT NOTES:
+      
+      - This will work on both mobile and desktop devices
+      - On mobile, it will open the WhatsApp app
+      - On desktop, it will open web.whatsapp.com
+      - The user must have WhatsApp installed for this to work properly
+      - The user will need to manually press send in WhatsApp
+      
+      ADVANTAGES:
+      - You receive messages directly in your WhatsApp
+      - No need for a backend server or database
+      - Instant notifications on your phone
+      
+      ALTERNATIVE APPROACH:
+      If you prefer to receive messages via email instead, we can modify the form to use
+      a mailto: link instead of WhatsApp. Let me know if you'd prefer that.
+    */
+  </script>
+</body>
+</html>

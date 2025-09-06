@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FLY WORLD LIMOSA - Premium Travel Experiences</title>
+
+  <!-- Font imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <meta name="description" content="FLY WORLD LIMOSA - Premium travel experiences, domestic & international, curated for unforgettable journeys." />
+
+  <style>
+    /* ====== Base resets & body background ====== */
+    :root{
+      --accent: #ff6b2d; /* saffron/orange accent */
+      --accent-dark: #e55a22;
+      --accent-light: #ff8e5d;
+      --muted: #f3f3f5;
+      --text: #111;
+      --dark-bg: #010101;
+      --darker-bg: #06060a;
+      --card-bg: rgba(255,255,255,0.06);
+      --max-width: 1150px;
+      --glass: rgba(255,255,255,0.06);
+      --transition: all 0.3s ease;
+    }
+    *{box-sizing: border-box}
+    html,body{height:100%;margin:0}
+
+    body{
+      background-image: url("bg.jpg");
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: "Nunito", "Ubuntu", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* ---------- Header / Navigation ---------- */
+    header.site-header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.45));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .site-bar{
+      max-width:var(--max-width); margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:16px;
+    }
+    .brand{
+      font-weight:800; 
+      color:var(--muted); 
+      letter-spacing:0.4px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand i {
+      color: var(--accent);
+    }
+    nav.main-nav{margin-left:auto}
+    nav.main-nav ul{display:flex; gap:6px; list-style:none; margin:0; padding:0; align-items:center}
+    nav.main-nav a{
+      color:var(--muted); 
+      text-decoration:none; 
+      padding:10px 16px; 
+      border-radius:8px; 
+      font-weight:600;
+      transition: var(--transition);
+      position: relative;
+    }
+    nav.main-nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 6px;
+      left: 16px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+    nav.main-nav a:hover{background:rgba(255,255,255,0.03); color:var(--accent)}
+    nav.main-nav a:hover:after { width: calc(100% - 32px); }
+
+    /* Mobile hamburger (simple CSS-only) */
+    .mobile-toggle{display:none}
+    .hamburger{display:none}
+    @media (max-width:860px){
+      nav.main-nav{position:fixed; inset:52px 12px auto 12px; background:linear-gradient(180deg, rgba(6,6,6,0.96), rgba(6,6,6,0.98)); padding:14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transform-origin:top right; display:none}
+      .hamburger{display:inline-flex; margin-left:auto; cursor:pointer}
+      .mobile-toggle:checked + .hamburger + nav.main-nav{display:block}
+      nav.main-nav ul{flex-direction:column; gap:10px}
+    }
+
+    /* ====== Hero / Intro ====== */
+    .hero{
+      text-align:center;
+      padding:56px 16px 36px;
+      color:var(--muted);
+      
+    }
+
+    .hero-inner{max-width:980px;margin:0 auto}
+    .hero h1{font-family:"Bebas Neue", sans-serif;font-size:40px;margin:0 0 10px}
+    .hero p.lead{margin:0 0 14px;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+    .hero p.small{font-style:oblique;margin:0 0 6px}
+    
+    .cta-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Slideshow area */
+    .slideshow{
+        max-width:1100px;
+        margin:22px auto 0;
+        border-radius:12px;
+        overflow:hidden;
+    }
+    .slides{
+        display:flex;
+        transition:transform 0.2s ease;
+    }
+    .slide{
+        min-width:100%;
+        height:300px;
+        display:block;
+    }
+    .slide img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        display:block;
+    }
+
+    /* ====== Features Section ====== */
+    .features {
+      max-width: var(--max-width);
+      margin: 50px auto;
+      padding: 0 16px;
+      text-align: center;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .feature-item {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.05);
+      color: var(--muted);
+      background-color: #000000;
+    }
+    
+    
+    
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+    
+    .feature-item h3 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 24px;
+      margin: 0 0 15px;
+      color: var(--muted);
+    }
+    
+    .feature-item p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    
+    /* ====== TESTIMONIALS SECTION ====== */
+    .testimonials {
+      max-width: var(--max-width);
+      margin: 70px auto;
+      padding: 0 16px;
+      text-align: center;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .testimonial-item {
+      background: rgb(0, 0, 0);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    /* ====== Footer ====== */
+    footer{
+        padding:18px 16px;
+        text-align:center;
+        color:var(--muted);
+        background:transparent;
+        margin-top: 50px;
+    }
+    
+    .footer-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    
+    .social-links a {
+      color: var(--muted);
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Image slider */
+    #div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 10vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .slider-container {
+            position: relative;
+            width:100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 0 auto;
+        }
+        
+        .slider-track {
+            display: flex;
+            width: 100%; /* Double width for seamless looping */
+            height:400px;
+            animation: slide 40s linear infinite;
+        }
+        
+        .slide {
+            width: 400px; /* 100% / 10 images (5 original + 5 duplicates) */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+        
+        /* Original images */
+        .slide:nth-child(1) {
+            background-image: url('dubai.jpg') ;
+        }
+        
+        .slide:nth-child(2) {
+            background-image: url('singapore.jpg');
+        }
+        
+        .slide:nth-child(3) {
+            background-image: url('goa.jpg');
+        }
+        
+        .slide:nth-child(4) {
+            background-image: url('kashmir2.jpg');
+        }
+        
+        .slide:nth-child(5) {
+            background-image: url('malaysia.jpg');
+        }
+        
+        /* Duplicate images for seamless loop */
+        .slide:nth-child(6) {
+            background-image: url('dubai.jpg');
+        }
+        
+        .slide:nth-child(7) {
+            background-image: url('singapore.jpg');
+        }
+        
+        .slide:nth-child(8) {
+            background-image: url('goa.jpg');
+        }
+        
+        .slide:nth-child(9) {
+            background-image: url('kashmir2.jpg');
+        }
+        
+        .slide:nth-child(10) {
+            background-image: url('malaysia.jpg');
+        }
+        
+        /* Animation - moves continuously without sliding back */
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-500%); /* Move by half the width (the original images) */
+            }
+        }
+
+    /* ====== Responsive adjustments ====== */
+    @media (max-width:720px){
+      .hero h1{font-size:28px;}
+      .slideshow{height:220px;}
+      .slide{height:220px;}
+      
+      .features-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ====== Small accessibility note ====== */
+    @media (prefers-reduced-motion: reduce){
+      .slides{transition:none;}
+      .feature-item{transition:none;}
+      .slider-track{animation: none;}
+    }
+
+    h1, h2, h3, p, a {
+  color: #ffffff; /* Pure white text */
+  text-shadow: 6px 6px 10px rgba(0,0,0,0.9); /* Strong shadow for visibility */
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ====== Header with improved structure and mobile toggle ====== -->
+  <header class="site-header" role="banner">
+    <div class="site-bar">
+      <div class="brand">
+        <i class="fas fa-globe-americas"></i>
+        FLY WORLD LIMOSA
+      </div>
+
+      <!-- Mobile-only checkbox toggle (no JS required) -->
+      <input id="mobile-toggle" class="mobile-toggle" type="checkbox" aria-hidden="true" />
+      <label for="mobile-toggle" class="hamburger" aria-hidden="true" title="Toggle menu" style="color:var(--muted);">
+        <!-- simple hamburger icon -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect y="5" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="17" width="24" height="2" rx="1" fill="currentColor"></rect>
+        </svg>
+      </label>
+
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="HOME.HTML"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="TravelPackages.html" target="_blank"><i class="fas fa-suitcase"></i> Travel Packages</a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+          <li><a href="Contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== HERO SECTION ====== -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <h1>Explore The World's Wonders</h1>
+      <p class="lead">From the snow-capped Himalayas to sun-kissed beaches, we craft journeys that stay in your heart forever.</p>
+      <p class="small">Experience premium travel with personalized service and unforgettable memories</p>
+      
+      <div id="div">
+        <div class="container">
+            <div class="slider-container">
+                <div class="slider-track">
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <a href="TravelPackages.html" class="cta-button">Discover Our Packages</a>
+  </section>
+
+  <!-- ====== FEATURES SECTION ====== -->
+  <section class="features">
+    <h2 class="section-title">Why Choose FLY WORLD LIMOSA?</h2>
+    
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">✈️</div>
+        <h3>Curated Experiences</h3>
+        <p>Our travel experts design personalized itineraries that capture the essence of each destination.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">🌎</div>
+        <h3>Global Destinations</h3>
+        <p>From domestic gems to international wonders, we offer diverse travel options for every taste.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">⭐</div>
+        <h3>Premium Service</h3>
+        <p>Enjoy seamless travel with our end-to-end service, from planning to execution.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TESTIMONIALS SECTION ====== -->
+  <section class="testimonials">
+    <h2 class="section-title">What Our Travelers Say</h2>
+    
+    <div class="testimonial-grid">
+      <div class="testimonial-item">
+        <p class="testimonial-text">"My family's trip to Dubai was absolutely magical. Every detail was perfectly planned, and the accommodations were superb."</p>
+        <p class="testimonial-author">- Rajesh K., Mumbai</p>
+      </div>
+      
+      <div class="testimonial-item">
+        <p class="testimonial-text">"The Kashmir package exceeded all expectations. The personalized guidance made us feel like we were experiencing the real heart of the region."</p>
+        <p class="testimonial-author">- Priya S., Delhi</p>
+      </div>
+      
+      <div class="testimonial-item">
+        <p class="testimonial-text">"I've traveled with many agencies, but FLY WORLD LIMOSA stands out for their attention to detail and customer care."</p>
+        <p class="testimonial-author">- Amit P., Bangalore</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">📱</a>
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+      </div>
+      <p>&copy; <span id="year"></span> FLY WORLD LIMOSA — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ====== JavaScript ====== -->
+  <script>
+    // Fill current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

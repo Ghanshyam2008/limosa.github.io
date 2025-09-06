@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Reviews - FLY WORLD LIMOSA</title>
+  
+  <!-- Font imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ====== Base resets & body background ====== */
+    :root{
+      --accent: #ff6b2d; /* saffron/orange accent */
+      --accent-dark: #e55a22;
+      --accent-light: #ff8e5d;
+      --muted: #f3f3f5;
+      --text: #111;
+      --dark-bg: #010101;
+      --darker-bg: #06060a;
+      --card-bg: rgba(255,255,255,0.06);
+      --max-width: 1150px;
+      --glass: rgba(255,255,255,0.06);
+      --transition: all 0.3s ease;
+    }
+    *{box-sizing: border-box}
+    html,body{height:100%;margin:0}
+
+    body{
+      font-family: "Nunito", "Ubuntu", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background-image: url("bg.jpg");
+      background-size: cover;
+      background-attachment: fixed;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      color: var(--muted);
+    }
+
+    /* ---------- Header / Navigation ---------- */
+    header.site-header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.45));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .site-bar{
+      max-width:var(--max-width); margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:16px;
+    }
+    .brand{
+      font-weight:800; 
+      color:var(--muted); 
+      letter-spacing:0.4px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand i {
+      color: var(--accent);
+    }
+    nav.main-nav{margin-left:auto}
+    nav.main-nav ul{display:flex; gap:6px; list-style:none; margin:0; padding:0; align-items:center}
+    nav.main-nav a{
+      color:var(--muted); 
+      text-decoration:none; 
+      padding:10px 16px; 
+      border-radius:8px; 
+      font-weight:600;
+      transition: var(--transition);
+      position: relative;
+    }
+    nav.main-nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 6px;
+      left: 16px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+    nav.main-nav a:hover{background:rgba(255,255,255,0.03); color:var(--accent)}
+    nav.main-nav a:hover:after { width: calc(100% - 32px); }
+
+    /* Mobile hamburger (simple CSS-only) */
+    .mobile-toggle{display:none}
+    .hamburger{display:none}
+    @media (max-width:860px){
+      nav.main-nav{position:fixed; inset:52px 12px auto 12px; background:linear-gradient(180deg, rgba(6,6,6,0.96), rgba(6,6,6,0.98)); padding:14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transform-origin:top right; display:none}
+      .hamburger{display:inline-flex; margin-left:auto; cursor:pointer}
+      .mobile-toggle:checked + .hamburger + nav.main-nav{display:block}
+      nav.main-nav ul{flex-direction:column; gap:10px}
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs{
+      max-width:var(--max-width); 
+      margin:28px auto 18px; 
+      padding:0 20px; 
+      color:rgba(255,255,255,0.8); 
+      font-size:14px;
+      display: flex;
+      align-items: center;
+      gap: 6px; 
+    }
+    .breadcrumbs a{
+      color:rgba(255,255,255,0.8); 
+      text-decoration:none;
+      transition: var(--transition);
+    }
+    .breadcrumbs a:hover {
+      color: var(--accent);
+    }
+    .breadcrumbs span {
+      opacity: 0.6;
+    }
+
+    /* Main content */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      color: var(--muted);
+      margin: 0 0 28px;
+      font-weight: 800;
+      font-size: 2.2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      height: 4px;
+      width: 60px;
+      background: var(--accent);
+      bottom: -10px;
+      left: 0;
+      border-radius: 2px;
+    }
+
+    /* Reviews grid */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .review-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 35px rgba(2,6,23,0.45);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    .review-card:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      top: 0;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .reviewer-details h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .review-date {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .rating {
+      color: #FFD700; /* Gold color for stars */
+      font-size: 1.2rem;
+    }
+
+    .review-content {
+      margin-top: 16px;
+    }
+
+    .review-text {
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .review-destination {
+      font-style: italic;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    /* Add review form */
+    .add-review {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 35px rgba(2,6,23,0.45);
+      border: 1px solid rgba(255,255,255,0.04);
+      margin-bottom: 40px;
+      background-color: black;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .star-rating {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .star-rating input {
+      display: none;
+    }
+
+    .star-rating label {
+      font-size: 24px;
+      color: #555;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: #FFD700;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255,107,45,0.25);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(255,107,45,0.35);
+    }
+
+    /* Footer */
+    footer {
+        background: linear-gradient(180deg, var(--darker-bg), rgb(230, 103, 0));
+      padding: 50px 0 30px;
+      margin-top: 60px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      color: var(--muted);
+      margin: 0 0 20px;
+      font-size: 1.2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h3:after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 30px;
+      background: var(--accent);
+      bottom: -8px;
+      left: 0;
+    }
+
+    .footer-col p {
+      opacity: 0.7;
+      line-height: 1.6;
+    }
+
+    .contact-info {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-info li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-info i {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .contact-info a{
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 50px;
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      
+      .add-review {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Header with improved structure and mobile toggle ====== -->
+  <header class="site-header" role="banner">
+    <div class="site-bar">
+      <div class="brand">
+        <i class="fas fa-globe-americas"></i>
+        FLY WORLD LIMOSA
+      </div>
+
+      <!-- Mobile-only checkbox toggle (no JS required) -->
+      <input id="mobile-toggle" class="mobile-toggle" type="checkbox" aria-hidden="true" />
+      <label for="mobile-toggle" class="hamburger" aria-hidden="true" title="Toggle menu" style="color:var(--muted);">
+        <!-- simple hamburger icon -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect y="5" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="17" width="24" height="2" rx="1" fill="currentColor"></rect>
+        </svg>
+      </label>
+
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="HOME.HTML"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="TravelPackages.html"><i class="fas fa-suitcase"></i> Travel Packages</a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+          <li><a href="Contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+    <h1 class="section-title">Customer Reviews</h1>
+    <p>See what our travelers have to say about their experiences with FLY WORLD LIMOSA.</p>
+
+    <!-- Add Review Form -->
+    <section class="add-review">
+      <h2>Share Your Experience</h2>
+      <form id="review-form">
+        <div class="form-group">
+          <label for="reviewer-name">Your Name</label>
+          <input type="text" id="reviewer-name" class="form-control" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="review-destination">Destination Visited</label>
+          <input type="text" id="review-destination" class="form-control" placeholder="Which destination did you visit?">
+        </div>
+        
+        <div class="form-group">
+          <label>Your Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5">★</label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4">★</label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3">★</label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2">★</label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1">★</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="review-text">Your Review</label>
+          <textarea id="review-text" class="form-control" placeholder="Share your experience..." required></textarea>
+        </div>
+        
+        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Submit Review</button>
+      </form>
+    </section>
+
+    <!-- Reviews Grid -->
+    <h2 class="section-title">What Our Travelers Say</h2>
+    <div class="reviews-grid" id="reviews-container">
+      <!-- Review 1 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">RK</div>
+            <div class="reviewer-details">
+              <h3>Rajesh Kumar</h3>
+              <div class="review-date">March 15, 2023</div>
+            </div>
+          </div>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">Our Dubai trip was absolutely magical! Every detail was perfectly planned, and the accommodations were superb. The desert safari was the highlight of our trip.</p>
+          <div class="review-destination">Destination: Dubai</div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">PS</div>
+            <div class="reviewer-details">
+              <h3>Priya Sharma</h3>
+              <div class="review-date">February 8, 2023</div>
+            </div>
+          </div>
+          <div class="rating">★★★★☆</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">The Kashmir package exceeded all expectations. The personalized guidance made us feel like we were experiencing the real heart of the region. Would definitely travel with them again!</p>
+          <div class="review-destination">Destination: Kashmir</div>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">AP</div>
+            <div class="reviewer-details">
+              <h3>Amit Patel</h3>
+              <div class="review-date">January 22, 2023</div>
+            </div>
+          </div>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">I've traveled with many agencies, but FLY WORLD LIMOSA stands out for their attention to detail and customer care. Our Singapore trip was flawless from start to finish.</p>
+          <div class="review-destination">Destination: Singapore</div>
+        </div>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">SD</div>
+            <div class="reviewer-details">
+              <h3>Sunita Desai</h3>
+              <div class="review-date">December 5, 2022</div>
+            </div>
+          </div>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">Our family vacation to Thailand was incredible! The itinerary was well-balanced with activities and relaxation time. The hotel selections were perfect and the guides were knowledgeable.</p>
+          <div class="review-destination">Destination: Thailand</div>
+        </div>
+      </div>
+
+      <!-- Review 5 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">VM</div>
+            <div class="reviewer-details">
+              <h3>Vikram Mehta</h3>
+              <div class="review-date">November 18, 2022</div>
+            </div>
+          </div>
+          <div class="rating">★★★★☆</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">The Goa package was excellent value for money. Beaches were beautiful and the accommodations were comfortable. The only minor issue was the delay in one of our transfers.</p>
+          <div class="review-destination">Destination: Goa</div>
+        </div>
+      </div>
+
+      <!-- Review 6 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">NM</div>
+            <div class="reviewer-details">
+              <h3>Neha Malhotra</h3>
+              <div class="review-date">October 30, 2022</div>
+            </div>
+          </div>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">Our honeymoon in Maldives was absolutely perfect! FLY WORLD LIMOSA took care of every little detail. The resort was breathtaking and the surprise romantic dinner on the beach was magical.</p>
+          <div class="review-destination">Destination: Maldives</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Enhanced footer with contact information -->
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>Fly World Limosa</h3>
+        <p>Creating unforgettable travel experiences with personalized service and attention to detail.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-phone"></i> <a href="tel:+919924003434">+91 9924003434</a></li>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:info@flyworld.com">info@flyworld.com</a></li>
+          <li><i class="fas fa-map-marker-alt"></i> Ahmedabad, India</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Popular Destinations</h3>
+        <p>Dubai • Bali • Singapore • Thailand • Maldives • Europe • Australia</p>
+      </div>
+    </div>
+    <div class="copyright">
+      © <span id="year"></span> Fly World Limosa — All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Review form functionality
+    document.getElementById('review-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('reviewer-name').value;
+      const destination = document.getElementById('review-destination').value;
+      const rating = document.querySelector('input[name="rating"]:checked') ? 
+                     parseInt(document.querySelector('input[name="rating"]:checked').value) : 0;
+      const text = document.getElementById('review-text').value;
+      
+      // Validate rating
+      if (rating === 0) {
+        alert('Please select a rating');
+        return;
+      }
+      
+      // Create new review element
+      const reviewCard = document.createElement('div');
+      reviewCard.className = 'review-card';
+      
+      // Generate stars based on rating
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+        stars += i < rating ? '★' : '☆';
+      }
+      
+      // Get initials for avatar
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+      
+      // Set today's date
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      
+      // Create review HTML
+      reviewCard.innerHTML = `
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">${initials}</div>
+            <div class="reviewer-details">
+              <h3>${name}</h3>
+              <div class="review-date">${dateStr}</div>
+            </div>
+          </div>
+          <div class="rating">${stars}</div>
+        </div>
+        <div class="review-content">
+          <p class="review-text">${text}</p>
+          ${destination ? `<div class="review-destination">Destination: ${destination}</div>` : ''}
+        </div>
+      `;
+      
+      // Add new review to the top of the reviews container
+      document.getElementById('reviews-container').prepend(reviewCard);
+      
+      // Reset form
+      this.reset();
+      
+      // Reset star rating visual
+      const starLabels = document.querySelectorAll('.star-rating label');
+      starLabels.forEach(label => {
+        label.style.color = '#555';
+      });
+      
+      // Show success message
+      alert('Thank you for your review! It has been added.');
+    });
+
+    // Add hover effect for star rating
+    const starInputs = document.querySelectorAll('.star-rating input');
+    const starLabels = document.querySelectorAll('.star-rating label');
+    
+    starLabels.forEach(label => {
+      label.addEventListener('mouseenter', function() {
+        const hoverValue = this.getAttribute('for').replace('star', '');
+        highlightStars(hoverValue);
+      });
+      
+      label.addEventListener('mouseleave', function() {
+        const checkedInput = document.querySelector('input[name="rating"]:checked');
+        if (checkedInput) {
+          highlightStars(checkedInput.value);
+        } else {
+          resetStars();
+        }
+      });
+    });
+    
+    starInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        highlightStars(this.value);
+      });
+    });
+    
+    function highlightStars(value) {
+      starLabels.forEach(label => {
+        const starValue = label.getAttribute('for').replace('star', '');
+        label.style.color = starValue <= value ? '#FFD700' : '#555';
+      });
+    }
+    
+    function resetStars() {
+      starLabels.forEach(label => {
+        label.style.color = '#555';
+      });
+    }
+  </script>
+</body>
+</html> 

@@ -1,0 +1,441 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LIMOSA | Home</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Mozilla+Headline:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background: url("bg.jpg") no-repeat fixed center center;
+            background-size: cover;
+        }
+        .title {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            overflow: auto;
+        }
+        .brand {
+            float: left;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            float: right;
+        }
+        .nav-links a {
+            color:white ;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-family: "Ubuntu", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        }
+        .nav-links a:hover {
+            font-size: 19px;
+            text-decoration: underline;
+            color: orangered;
+            padding: 4px;
+            border: 2px solid white;
+        }
+        header {
+            text-align: center;
+            color: white;
+            padding: 50px 20px;
+        }
+        header h1 {
+            margin: 0 0 20px;
+            font-size: 32px;
+        }
+        header p {
+            margin: 5px 0;
+            font-size: 18px;
+            font-style: oblique;
+            font-weight: bold;
+            font-variant: small-caps;
+            text-transform: uppercase;
+        }
+        .destinations {
+            
+            width: 100%;
+            overflow: auto;
+        }
+        .destination {
+            
+            float: left;
+            margin: 0 1% 20px 0;
+            box-sizing: border-box;
+        }
+        .destination img{
+            display: flex;
+            justify-content: center;
+            width: 400px;
+            height: auto;
+        }
+        
+        @media (min-width: 769px) {
+            .destination {
+            width: 32%;
+            }
+            .destination:nth-child(3n) {
+            margin-right: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            .destination {
+            width: 48%;
+            }
+            .destination:nth-child(2n) {
+            margin-right: 0;
+            }
+        }
+        @media (max-width: 480px) {
+            .destination {
+            width: 100%;
+            margin: 10px 0;
+            }
+        }
+        .destination img {
+            height: 300px;
+            width: 400px;
+            padding-left: 35px;
+            float: left;
+            display: flex;
+        }
+        .destination h2 {
+            margin:auto 45% auto;
+            font-size: auto;
+            color: black;
+            display: block;
+            font-family: "Mozilla Headline", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        }
+        .heading{
+            color: black;
+        }
+        </style>
+        </head>
+        <body>
+
+        <div class="title">
+            <div class="brand">FLY WORLD LIMOSA</div>
+            <div class="nav-links">
+            
+            <a href="HOME.HTML">Home</a>
+            <a href="TravelPackages.html" target="_blank">Travel Packages</a>
+            <a href="#Reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+            
+            </div>
+        </div>
+
+        <header>
+            <div class="heading">
+            <h1>Explore The World's Wonders</h1>
+            <p>“From the snow-capped Himalayas to sun-kissed beaches, we craft journeys that stay in your heart forever."</p>
+            <p>A rotating slideshow of real destinations (wildlife safari, mountains, beaches, cultural trips).</p>
+        </div>
+        </header>
+
+        <div class="destinations">
+            <div class="destination">
+            <img src="dubai.jpg" alt="Dubai">
+            <h2>Dubai</h2>
+            </div>
+            <div class="destination">
+            <img src="singapore.jpg" alt="Singapore">
+            <h2>Singapore</h2>
+            </div>
+            <div class="destination">
+            <img src="thailand.jpg" alt="Thailand">
+            <h2>Thailand</h2>
+            </div>
+            <div class="destination">
+            <img src="goa.jpg" alt="Goa">
+            <h2>Goa</h2>
+            </div>
+            <div class="destination">
+            <img src="kashmir.jpg" alt="Kashmir">
+            <h2>Kashmir</h2>
+            </div>
+            <div class="destination">
+            <img src="udaipur.jpg" alt="Udaipur">
+            <h2>Udaipur</h2>
+            </div>
+        </div>
+
+
+        <!-- Chat widget (copied from TravelPackages.html) -->
+        <style>
+            /* Chat widget styles - matches your black/orangered/white theme */
+            .chat-widget-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: orangered;
+            color: #fff;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+
+            .chat-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 92px;
+            width: 320px;
+            max-width: calc(100% - 40px);
+            background: #000; /* black panel */
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+            overflow: hidden;
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            }
+
+            .chat-header {
+            background: #111;
+            padding: 12px 14px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            }
+            .chat-header h4 {
+            margin:0;
+            font-size:16px;
+            font-weight:700;
+            color:#fff;
+            font-family: sans-serif;
+            }
+            .chat-close {
+            margin-left:auto;
+            background:transparent;
+            border:none;
+            color:#fff;
+            font-size:18px;
+            cursor:pointer;
+            }
+
+            .chat-body {
+            padding:10px;
+            height:260px;
+            overflow:auto;
+            background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
+            }
+
+            .msg {
+            display:block;
+            margin-bottom:10px;
+            max-width:85%;
+            padding:8px 10px;
+            border-radius:8px;
+            line-height:1.2;
+            font-size:14px;
+            }
+            .msg.user { background: #fff; color: #000; margin-left:auto; border-bottom-right-radius:2px; }
+            .msg.bot  { background: rgba(255,255,255,0.08); color: #fff; margin-right:auto; border-bottom-left-radius:2px; }
+
+            .chat-footer {
+            padding:10px;
+            display:flex;
+            gap:8px;
+            align-items:center;
+            background:#000;
+            }
+
+            .chat-input {
+            flex:1;
+            min-height:38px;
+            border-radius:8px;
+            border:1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            color:#fff;
+            padding:8px 10px;
+            outline:none;
+            }
+
+            .chat-send {
+            background: orangered;
+            border:none;
+            color:#fff;
+            padding:8px 12px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:700;
+            }
+
+            .whatsapp-send {
+            display:block;
+            margin-top:8px;
+            text-align:center;
+            font-size:13px;
+            color: orangered;
+            text-decoration: none;
+            font-weight:700;
+            }
+
+            /* small screens */
+            @media (max-width:420px) {
+            .chat-panel { width: 92%; right: 4%; bottom: 84px; }
+            .chat-body { height:200px; }
+            }
+        </style>
+
+        <!-- Chat toggle button -->
+        <button id="chatToggle" class="chat-widget-btn" aria-label="Open chat">💬</button>
+
+        <!-- Panel -->
+        <div id="chatPanel" class="chat-panel" role="dialog" aria-modal="false" aria-label="Chat with us">
+            <div class="chat-header">
+            <h4>Chat with us</h4>
+            <button id="chatClose" class="chat-close" aria-label="Close chat">✕</button>
+            </div>
+
+            <div id="chatBody" class="chat-body" aria-live="polite">
+            <!-- messages will appear here -->
+            <div class="msg bot">Hi! 👋 How can we help you today? You can also send this chat to WhatsApp to continue.</div>
+            </div>
+
+            <div class="chat-footer">
+            <input id="chatInput" class="chat-input" type="text" placeholder="Type your message..." aria-label="Type your message">
+            <button id="chatSend" class="chat-send" aria-label="Send message">Send</button>
+            </div>
+
+            <a id="waLink" class="whatsapp-send" target="_blank" rel="noopener noreferrer" href="#">
+            Send this chat to WhatsApp
+            </a>
+        </div>
+
+        <script>
+            (function(){
+            // PHONE NUMBER: update if you want a different number (international format, no +)
+            const PHONE = "919924003434";
+
+            const toggleBtn = document.getElementById('chatToggle');
+            const panel = document.getElementById('chatPanel');
+            const closeBtn = document.getElementById('chatClose');
+            const sendBtn = document.getElementById('chatSend');
+            const inputEl = document.getElementById('chatInput');
+            const bodyEl = document.getElementById('chatBody');
+            const waLink = document.getElementById('waLink');
+
+            // restore messages from sessionStorage for short-term persistence
+            const STORAGE_KEY = 'limosa_chat_msgs_v1';
+            function loadMessages(){
+                try {
+                const raw = sessionStorage.getItem(STORAGE_KEY);
+                if(!raw) return;
+                const arr = JSON.parse(raw);
+                arr.forEach(m => appendMessage(m.text, m.from, false));
+                } catch(e){ console.warn(e) }
+            }
+            function saveMessage(text, from){
+                try {
+                const raw = sessionStorage.getItem(STORAGE_KEY);
+                const arr = raw ? JSON.parse(raw) : [];
+                arr.push({text, from});
+                // keep last 20 messages
+                if(arr.length>20) arr.splice(0, arr.length-20);
+                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+                } catch(e){ console.warn(e) }
+            }
+
+            function appendMessage(text, from='bot', scroll=true){
+                const d = document.createElement('div');
+                d.className = 'msg ' + (from === 'user' ? 'user' : 'bot');
+                d.textContent = text;
+                bodyEl.appendChild(d);
+                if(scroll) bodyEl.scrollTop = bodyEl.scrollHeight;
+            }
+
+            function togglePanel(show){
+                panel.style.display = show ? 'flex' : 'none';
+                if(show) {
+                inputEl.focus();
+                } else {
+                toggleBtn.focus();
+                }
+            }
+
+            toggleBtn.addEventListener('click', ()=> {
+                togglePanel(panel.style.display !== 'flex');
+            });
+            closeBtn.addEventListener('click', ()=> togglePanel(false));
+
+            sendBtn.addEventListener('click', sendMessage);
+            inputEl.addEventListener('keydown', function(e){
+                if(e.key === 'Enter') sendMessage();
+            });
+
+            function sendMessage(){
+                const text = inputEl.value.trim();
+                if(!text) return;
+                appendMessage(text, 'user');
+                saveMessage(text, 'user');
+                inputEl.value = '';
+                // simple simulated bot response
+                setTimeout(()=> {
+                const reply = generateReply(text);
+                appendMessage(reply, 'bot');
+                saveMessage(reply, 'bot');
+                }, 600);
+
+                // update WhatsApp link to include conversation text
+                updateWhatsAppLink();
+            }
+
+            function generateReply(userText){
+                // small set of helper replies - you can expand later
+                const t = userText.toLowerCase();
+                if(t.includes('price') || t.includes('cost') || t.includes('rate')) return "For pricing, please tell us destination and travel dates — or press 'Send this chat to WhatsApp' to continue with full details.";
+                if(t.includes('book') || t.includes('booking')) return "I can help with booking. Please share desired dates and number of travellers. You can also continue on WhatsApp for quicker replies.";
+                if(t.includes('hello') || t.includes('hi')) return "Hello! 👋 How can we assist — packages, bookings, or custom trips?";
+                return "Thanks — we received your message. An agent will reply soon. You can also press the button below to continue on WhatsApp.";
+            }
+
+            function updateWhatsAppLink(){
+                // collect visible messages and send to whatsapp
+                const msgs = Array.from(bodyEl.querySelectorAll('.msg')).map(el => {
+                const role = el.classList.contains('user') ? 'You' : 'Agent';
+                return role + ': ' + el.textContent;
+                });
+                // join and encode
+                const text = encodeURIComponent(msgs.join('\n'));
+                waLink.href = `https://api.whatsapp.com/send?phone=${PHONE}&text=${text}`;
+            }
+
+            // initial setup
+            loadMessages();
+            updateWhatsAppLink();
+
+            // expose a quick open function if needed
+            window.openLimosaChat = function(){
+                togglePanel(true);
+            };
+            })();
+        </script>
+
+        </body>
+        </html>
+        

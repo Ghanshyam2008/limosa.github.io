@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dubai — Fly World Limosa</title>
+  <!--
+    Improvements made (see inline comments below):
+    - Fixed background-image usage and removed duplicate/incorrect CSS rules.
+    - Replaced many generic divs with semantic elements (header, main, section, nav).
+    - Added responsive layout (flex + grid) and mobile-friendly navigation (hamburger).
+    - Converted itinerary to card grid with clear Day header & accessible structure.
+    - Added small UI polish: shadows, transitions, badges, better spacing & font scale.
+    - Included comments inside the HTML/CSS to explain changes you can edit.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Variables & reset ---------- */
+    :root{
+      --accent: #ff6b2d; /* saffron/orange accent */
+      --muted: #f3f3f5;
+      --text: #111;
+      --glass: rgba(255,255,255,0.06);
+      --card-bg: rgba(255,255,255,0.06);
+      --max-width: 1150px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Nunito", "Ubuntu", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: linear-gradient(180deg, #010101, #06060a);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* ---------- Header / Navigation ---------- */
+    header.site-header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .site-bar{
+      max-width:var(--max-width); margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:16px;
+    }
+    .brand{font-weight:800; color:var(--muted); letter-spacing:0.4px}
+    nav.main-nav{margin-left:auto}
+    nav.main-nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0; align-items:center}
+    nav.main-nav a{color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:8px; font-weight:600}
+    nav.main-nav a:hover{background:rgba(255,255,255,0.03); color:var(--accent)}
+
+    /* Mobile hamburger (simple CSS-only) */
+    .mobile-toggle{display:none}
+    .hamburger{display:none}
+    @media (max-width:860px){
+      nav.main-nav{position:fixed; inset:52px 12px auto 12px; background:linear-gradient(180deg, rgba(6,6,6,0.96), rgba(6,6,6,0.98)); padding:14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transform-origin:top right; display:none}
+      .hamburger{display:inline-flex; margin-left:auto; cursor:pointer}
+      .mobile-toggle:checked + .hamburger + nav.main-nav{display:block}
+      nav.main-nav ul{flex-direction:column; gap:10px}
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      min-height: 48vh;
+      display:flex; align-items:center; color:white; position:relative; overflow:hidden;
+      /* note: keep image file "dubai2.jpg" in the same folder, or update path */
+      background-image: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('dubai2.jpg');
+      background-size:cover; background-position:center;
+    }
+    .hero .hero-inner{max-width:var(--max-width); margin:0 auto; padding:48px 20px; display:flex; gap:24px; align-items:center}
+    .hero h1{font-size:clamp(28px,5vw,64px); margin:0; font-weight:800; letter-spacing:1px}
+    .hero p{margin:8px 0 0; opacity:0.9}
+    .hero .cta{margin-top:14px; display:inline-flex; gap:8px}
+    .btn{background:var(--accent); color:white; border:none; padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer; box-shadow:0 8px 20px rgba(255,107,45,0.15);}
+    .btn.secondary{background:rgba(255,255,255,0.08); color:var(--muted)}
+
+    /* ---------- Breadcrumbs ---------- */
+    .breadcrumbs{max-width:var(--max-width); margin:18px auto; padding:0 20px; color:rgba(255,255,255,0.8); font-size:14px}
+    .breadcrumbs a{color:rgba(255,255,255,0.8); text-decoration:none}
+
+    /* ---------- Itinerary / Cards ---------- */
+    main{max-width:var(--max-width); margin:18px auto; padding:0 20px 80px}
+    .grid{
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:18px; border-radius:14px; box-shadow: 0 6px 30px rgba(2,6,23,0.45); color:var(--muted);
+      border:1px solid rgba(255,255,255,0.03);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.6)}
+    .day-badge{display:inline-block; font-weight:800; color:#0b0b0b; background:var(--accent); padding:8px 12px; border-radius:10px}
+    .card h3{margin:12px 0 6px}
+    .card ul{margin:0; padding-left:18px}
+    .card li{margin:8px 0}
+
+    /* ---------- Footer / contact ---------- */
+    footer{max-width:var(--max-width); margin:28px auto; padding:18px 20px; color:rgba(255,255,255,0.7); text-align:center}
+
+    /* Small screens adjustments */
+    @media (max-width:520px){
+      .hero{min-height:38vh}
+      .site-bar{padding:10px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with improved structure and mobile toggle -->
+  <header class="site-header" role="banner">
+    <div class="site-bar">
+      <div class="brand">FLY WORLD LIMOSA</div>
+
+      <!-- Mobile-only checkbox toggle (no JS required) -->
+      <input id="mobile-toggle" class="mobile-toggle" type="checkbox" aria-hidden="true" />
+      <label for="mobile-toggle" class="hamburger" aria-hidden="true" title="Toggle menu" style="color:var(--muted);">
+        <!-- simple hamburger icon -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect y="5" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="17" width="24" height="2" rx="1" fill="currentColor"></rect>
+        </svg>
+      </label>
+
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="HOME.HTML">Home</a></li>
+          <li><a href="TravelPackages.html" target="_blank">Travel Packages</a></li>
+          <li><a href="search.html">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero section: large background image with overlay text -->
+  <section class="hero" aria-label="Dubai hero image">
+    <div class="hero-inner">
+      <div>
+        <h1>DUBAI</h1>
+        <p>Experience the luxury, adventure and skyline of the UAE. Carefully crafted 6-night itinerary — customizable for families or solo travellers.</p>
+        <div class="cta">
+          <button class="btn"><a href="https://api.whatsapp.com/send/?phone=919924003434&text=Hello+I+want+to+
+            inquire+about+your+services&type=phone_number&app_absent=0"
+            style="text-decoration:none;color:white;">Book Now</a></button>
+          <button class="btn secondary"><a href="DUBAI PACKAGE.docx" style="text-decoration:none;
+            color:white;">Download Itinerary</a> </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumbs: kept simple & accessible -->
+  <div class="breadcrumbs" aria-hidden="false">
+    <a href="HOME.HTML">Home</a> &nbsp;›&nbsp; <a href="TravelPackages.html">Travel Packages</a> &nbsp;›&nbsp; <a href="dubai.html">International Packages</a> &nbsp;›&nbsp; Dubai
+  </div>
+
+  <!-- Main content: itinerary presented as cards for clarity -->
+  <main>
+    <section aria-labelledby="itinerary-heading">
+      <h2 id="itinerary-heading" style="color:var(--muted); margin:0 0 12px; font-weight:700">6-Night Suggested Itinerary</h2>
+
+      <div class="grid">
+        <!-- Repeatable card: you can duplicate and change day/points -->
+        <article class="card" aria-labelledby="day1">
+          <div class="day-badge">Day 1</div>
+          <h3 id="day1">Arrival & Transfer</h3>
+          <ul>
+            <li>Arrival at Abu Dhabi (or Dubai — specify)</li>
+            <li>Private transfer from airport to hotel in Dubai</li>
+            <li>Check-in at <strong>Hotel</strong></li>
+            <li>Evening at leisure — optional Dhow cruise or Marina walk</li>
+          </ul>
+        </article>
+
+        <article class="card" aria-labelledby="day2">
+          <div class="day-badge">Day 2</div>
+          <h3 id="day2">City Highlights</h3>
+          <ul>
+            <li>Breakfast at hotel</li>
+            <li>Half-day city tour: Burj Khalifa (view), Dubai Mall, Fountain show</li>
+            <li>Evening free for shopping or optional desert safari</li>
+          </ul>
+        </article>
+
+        <article class="card" aria-labelledby="day3">
+          <div class="day-badge">Day 3</div>
+          <h3 id="day3">Desert Adventure</h3>
+          <ul>
+            <li>Morning free — relax at hotel or visit local souks</li>
+            <li>Afternoon desert safari with BBQ dinner & entertainment</li>
+          </ul>
+        </article>
+
+        <article class="card" aria-labelledby="day4">
+          <div class="day-badge">Day 4</div>
+          <h3 id="day4">Theme Park / Free Day</h3>
+          <ul>
+            <li>Optional visit to IMG Worlds / Aquaventure / Motiongate</li>
+            <li>Or relax and shop at Mall of the Emirates</li>
+          </ul>
+        </article>
+
+        <article class="card" aria-labelledby="day5">
+          <div class="day-badge">Day 5</div>
+          <h3 id="day5">Abu Dhabi Excursion</h3>
+          <ul>
+            <li>Full-day trip to Abu Dhabi (Sheikh Zayed Grand Mosque, Louvre Abu Dhabi)</li>
+            <li>Return to Dubai by evening</li>
+          </ul>
+        </article>
+
+        <article class="card" aria-labelledby="day6">
+          <div class="day-badge">Day 6</div>
+          <h3 id="day6">Departure</h3>
+          <ul>
+            <li>Breakfast & hotel check-out</li>
+            <li>Private transfer to airport</li>
+            <li>Assistance with departure formalities</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Simple footer with contact anchor for "Contact" in nav -->
+  <footer id="contact">
+    <div style="font-weight:700; margin-bottom:6px">Fly World Limosa</div>
+    <div>For bookings & enquiries: <a href="tel:+919924003434" style="color:var(--accent); text-decoration:none">+91 9924003434</a>
+                                 • <a href="mailto:info@flyworld.com" style="color:var(--accent); text-decoration:none">info@flyworld.com</a></div>
+    <div style="margin-top:12px; font-size:13px; color:rgba(255,255,255,0.5)">© <span id="year"></span> Fly World Limosa — All rights reserved</div>
+  </footer>
+
+  <script>
+    // small script to set current year — purely progressive enhancement
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
